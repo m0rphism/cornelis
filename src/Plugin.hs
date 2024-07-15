@@ -65,7 +65,7 @@ gotoDefinition = withAgda $ do
       vim_command $ "edit " <> ds_filepath ds
       b' <- window_get_buffer w
       contents <- fmap (T.unlines . V.toList) $ buffer_get_lines b' 0 (-1) False
-      let buffer_idx = toBytes contents $ zeroIndex $ ds_position ds
+      let buffer_idx = toBytes contents $ incIndex $ zeroIndex $ ds_position ds
       -- TODO(sandy): use window_set_cursor instead?
       vim_command $ "keepjumps normal! " <> T.pack (show buffer_idx) <> "go"
 
